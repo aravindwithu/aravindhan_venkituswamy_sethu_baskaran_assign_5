@@ -6,12 +6,13 @@ package fileVisitors.util;
 * FileDisplayInterface interface to write to output file.
 */
 public interface FileDisplayInterface{
+
 	/**
-	* writeToFile method.
-	* Implements FileDisplayInterface writeToFile method.
+	* writeSchedulesToFile method.
+	* Implements FileDisplayInterface writeSchedulesToFile method.
 	* gets String s as argument.
 	* writes the given string to output file.
-	* @param s to be writtern to the writer object. 
+	* @param string to be writtern to the writer object. 
 	*/
-	public void writeToFile(String s);
+	public void writeSchedulesToFile(String string);
 }

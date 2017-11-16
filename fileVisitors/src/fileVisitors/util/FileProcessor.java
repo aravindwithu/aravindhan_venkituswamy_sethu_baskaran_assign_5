@@ -1,18 +1,12 @@
 package fileVisitors.util;
 
-//Header to import supporting classes.
 import java.io.BufferedReader;
 import java.io.FileReader;
-import fileVisitors.util.MyLogger;
-/**
-* FileProcessor class.
-* Created for cs542 - Design patterns.
-* FileProcessor class to process file.
-*/
+import java.io.File;	
+
 public class FileProcessor{
 	private BufferedReader file; // BufferedReader object to read from file.
 	private boolean isFileOpen = false;//  to maintain whether the file is open or not state.
-	private MyLogger myLogger;
 	/**
 	* FileProcessor constructor to intialize FileProcessor class.
 	* Requires input file course to intialize the BufferedReader object.
@@ -20,11 +14,17 @@ public class FileProcessor{
 	* @param filename to open the file reader object.
 	*/
 	public FileProcessor(String filename){
-		myLogger = new MyLogger();
-		myLogger.writeMessage("FileProcessor Constructor Called.", MyLogger.DebugLevel.CONSTRUCTOR);
+		File fileCheck;
 		try{
+			// Check if file doesn't exist
+			fileCheck = new File(filename);
+			if(!fileCheck.exists() || fileCheck.isDirectory()) {
+			    System.err.println("The " + filename + " file does not exist.Please include it");
+			    System.exit(1);
+			}
 			file = new BufferedReader(new FileReader(filename));
 			isFileOpen = true;
+			MyLogger.writeMessage("Inside FileProcessor constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 		}
 		catch (Exception ex)
 	  	{
@@ -32,25 +32,32 @@ public class FileProcessor{
 	    	ex.printStackTrace();
 	    	System.exit(0);
 	  	}
+	  	finally{
+	  		fileCheck = null;
+	  	}
 	}
 	/**
 	* readLine method.
 	* Reads the line from file.
 	* If read is true then readLine() is returned else file object is closed.
+	* The readLine method called by the threads to read line from file is synchronized.
 	* @param read - If read is true then readLine() is returned else file object is closed. 
 	* @return String - read file line string or message related to file activity.
 	*/
 	public String readLine(boolean read){
 		try{
-			if(isFileOpen){
-				if(read){
-					return file.readLine();
+			synchronized(this){
+				if(isFileOpen){
+					if(read){
+						return file.readLine();
+					}
+					else{
+						closeFile();
+						return "file closed sucessfully";
+					}
 				}else{
-					closeFile();
-					return "file closed sucessfully";
+					return "file is in closed state";
 				}
-			}else{
-				return "file is in closed state";
 			}
 		}
 		catch (Exception ex)
@@ -66,7 +73,7 @@ public class FileProcessor{
 	* closeFile method.
 	* closes the file object.
 	*/
-	private void closeFile(){
+	public void closeFile(){
 		try{
 			file.close();
 			isFileOpen = false;

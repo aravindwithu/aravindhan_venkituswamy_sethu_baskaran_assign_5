@@ -1,10 +1,9 @@
 package fileVisitors.driver;
 
 //Header to import supporting classes.
-import fileVisitors.util.Results;
+import fileVisitors.store.Results;
 import fileVisitors.util.FileProcessor;
 import fileVisitors.util.MyLogger;
-import java.io.PrintWriter;
 
 /**
 * Driver class contains main method.
@@ -18,10 +17,6 @@ public class Driver
 	    Results results;
 	    // Object declared for FileProcessor class.
 	    FileProcessor file;
-	    // Object declared for PrintWriter class.
-	    PrintWriter writer;
-	    // Object declared for MyLogger class.
-	    MyLogger myLogger;
 
 	    try{
 	    	// command line validation for input file and output file respectively.
@@ -41,58 +36,35 @@ public class Driver
 		    		throw new Exception("Please provide output file.");
 		    	}
 
-				String arg4 = "01234";// validates logger value is between 0 and 4.
-				if(args[4].equals("${arg4}") || args[4].equals("") || args[4].length() != 1 || (!arg4.contains(args[4]))){
+				String arg2 = "01234";// validates logger value is between 0 and 4.
+				if(args[2].equals("${arg4}") || args[2].equals("") || args[2].length() != 1 || (!arg2.contains(args[2]))){
 					throw new Exception("Logger value is incorrect");
 				}
 				else{
 					try{
-						MyLogger.setDebugValue(Integer.parseInt(args[4]));
+						MyLogger.setDebugValue(Integer.parseInt(args[2]));
 					}
 					catch(Exception e){
 						e.printStackTrace();
 						System.exit(0);
-					}
-					
+					}					
 				}
 		    }
 		    else{
-		    	throw new Exception("Please pass exactly 2 arguments one for input and another for output files.");
+		    	throw new Exception("Please pass exactly 3 arguments 1.input-file 2.output-file 3.Debug-value");
 		    }
 
 		    // Object intialized for FileProcessor with respective input file.
 			file = new FileProcessor(inputFile);
-			// The input values are read from file and stored treeBuilder object in BST format.
-			
 			// defines result object
-			results = new Results();
-			// defines myLogger object
-			myLogger = new MyLogger();
-			// intializes airportSecurity object
-			// AirportSecurity airportSecurity = new AirportSecurity();
+			results = new Results(outputFile);
 			String line;
-		    while ((line = file.readLine(true)) != null)
-		    {
-		    	// context class - tightenOrLoosenSecurity method is called.
-		    	// airportSecurity.tightenOrLoosenSecurity(line);
-		    	// context class - operate method is called.
-		    	// String result = airportSecurity.operate();
-		    	// Logger for result sring returned from operate method.
-		    	// myLogger.writeMessage(result, MyLogger.DebugLevel.RESULTS_OUTPUT);
-		    	// The return operation string is stored in result object
-		    	// results.storeNewResult(result);
-		    }
+		    // while ((line = file.readLine(true)) != null)
+		    // {
+		    	
+		    // }
 		    // closes the file resader.
 		    file.readLine(false);
-
-		   	// Object for PrintWriter is intialized with respective output file name and encoding format.
-		   	// To write original Tree to the output file.
-		   	writer = new PrintWriter(outputFile, "UTF-8");
-		    // writeAll method from Results class is called with writer object to write the test case results to the output file.
-		    results.writeAll(writer);
-		    // writer object is closed.
-		    writer.close();
-
 		    System.out.println("Output files generated successfully.");
 	    }
 	    catch(Exception ex){
@@ -103,8 +75,6 @@ public class Driver
 	    finally{// Clears all the objects created.
 		    results = null;
 		    file = null;
-		    writer = null;
-		    myLogger = null;
 	    }
 	}
 }

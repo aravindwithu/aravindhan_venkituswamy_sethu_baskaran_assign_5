@@ -1,17 +1,15 @@
 package fileVisitors.util;
-
 /**
 * StdoutDisplayInterface interface.
-* Created by Aravind Venkit for cs542 - Design patterns.
 * StdoutDisplayInterface interface to write to stdout (print) in command line.
 */
 public interface StdoutDisplayInterface{
 	/**
-	* writeToStdout method.
-	* Implements StdoutDisplayInterface writeToStdout method.
+	* writeToScreen method.
+	* Implements StdoutDisplayInterface writeToScreen method.
 	* gets String s as argument.
 	* prints the given string to command line.
-	* @param s to print the same to output command line.
+	* @param string to print the same to output command line.
 	*/
-	public void writeToStdout(String s);
+	public void writeToScreen(String string);
 }
