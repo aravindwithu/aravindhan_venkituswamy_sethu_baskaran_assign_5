@@ -78,9 +78,9 @@ public class Driver
 		    	// context class - operate method is called.
 		    	// String result = airportSecurity.operate();
 		    	// Logger for result sring returned from operate method.
-		    	myLogger.writeMessage(result, MyLogger.DebugLevel.RESULTS_OUTPUT);
-		    	//The return operation string is stored in result object
-		    	results.storeNewResult(result);
+		    	// myLogger.writeMessage(result, MyLogger.DebugLevel.RESULTS_OUTPUT);
+		    	// The return operation string is stored in result object
+		    	// results.storeNewResult(result);
 		    }
 		    // closes the file resader.
 		    file.readLine(false);

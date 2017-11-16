@@ -18,13 +18,13 @@ ant -buildfile src/build.xml run -Darg0=FIRST -Darg1=SECOND -Darg2=THIRD
 
 ## To create tarball for submission
 
-tar -czvf venkituswamy_aravindhan_assign_5.tar.gz --exclude=.* venkituswamy_aravindhan_assign_5
+tar -czvf venkituswamy_aravindhan_baskaran_sethu_assign_5.tar.gz --exclude=.* venkituswamy_aravindhan_assign_5
 
 -----------------------------------------------------------------------
 
 ## To unzip tarball for execution
 
-tar -xvf venkituswamy_aravindhan_assign_3.tar.gz
+tar -xvf venkituswamy_aravindhan_baskaran_sethu_assign_5.tar.gz
 
 -----------------------------------------------------------------------
 
