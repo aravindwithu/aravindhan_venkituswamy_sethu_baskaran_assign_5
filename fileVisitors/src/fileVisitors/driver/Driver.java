@@ -10,6 +10,7 @@ import fileVisitors.visitor.PopulateVisitor;
 import fileVisitors.visitor.VisitorI;
 import fileVisitors.visitor.PalindromeHighlight;
 import fileVisitors.visitor.PrimeLength;
+import fileVisitors.visitor.PrintTree;
 
 /**
 * Driver class contains main method.
@@ -77,8 +78,11 @@ public class Driver
     		
     		VisitorI primeLength = new PrimeLength(myTree);
     		myTree = (TreeBuilder)file.accept(primeLength);
-    		System.out.println("Printing tree===");
-    		myTree.printTree(myTree.getRoot());
+    		// System.out.println("Printing tree===");
+    		// myTree.printTree(myTree.getRoot());
+
+    		VisitorI printTree = new PrintTree(myTree);
+    		myTree = (TreeBuilder)file.accept(printTree);
 
 		    // System.out.println("Output files generated successfully.");
 	    }
