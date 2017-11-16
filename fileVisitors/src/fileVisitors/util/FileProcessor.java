@@ -2,7 +2,8 @@ package fileVisitors.util;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.File;	
+import java.io.File;
+import fileVisitors.visitor.VisitorI;	
 
 public class FileProcessor{
 	private BufferedReader file; // BufferedReader object to read from file.
@@ -46,18 +47,16 @@ public class FileProcessor{
 	*/
 	public String readLine(boolean read){
 		try{
-			synchronized(this){
-				if(isFileOpen){
-					if(read){
-						return file.readLine();
-					}
-					else{
-						closeFile();
-						return "file closed sucessfully";
-					}
-				}else{
-					return "file is in closed state";
+			if(isFileOpen){
+				if(read){
+					return file.readLine();
 				}
+				else{
+					closeFile();
+					return "file closed sucessfully";
+				}
+			}else{
+				return "file is in closed state";
 			}
 		}
 		catch (Exception ex)
@@ -67,6 +66,10 @@ public class FileProcessor{
 	    	System.exit(0);
 	    	return null;
 	  	}
+	}
+
+	public Object accept(VisitorI visitor){
+		return visitor.visit(this);
 	}
 
 	/**

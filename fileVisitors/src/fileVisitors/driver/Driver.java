@@ -4,6 +4,9 @@ package fileVisitors.driver;
 import fileVisitors.store.Results;
 import fileVisitors.util.FileProcessor;
 import fileVisitors.util.MyLogger;
+import fileVisitors.myTree.TreeBuilder;
+import fileVisitors.visitor.VisitorI;
+import fileVisitors.visitor.PopulateVisitor;
 
 /**
 * Driver class contains main method.
@@ -58,14 +61,12 @@ public class Driver
 			file = new FileProcessor(inputFile);
 			// defines result object
 			results = new Results(outputFile);
-			String line;
-		    // while ((line = file.readLine(true)) != null)
-		    // {
-		    	
-		    // }
-		    // closes the file resader.
-		    file.readLine(false);
-		    System.out.println("Output files generated successfully.");
+			VisitorI populateVisitor = new PopulateVisitor();
+			TreeBuilder myTree = (TreeBuilder)file.accept(populateVisitor);
+			System.out.println("Printing tree===");
+    		myTree.printTree(myTree.getRoot());
+
+		    // System.out.println("Output files generated successfully.");
 	    }
 	    catch(Exception ex){
 	    	System.err.println(ex.getMessage());// prints the error message.
