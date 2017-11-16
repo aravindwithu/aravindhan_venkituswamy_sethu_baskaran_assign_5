@@ -126,7 +126,7 @@ public class TreeBuilder {
 			return;
 		}
 		printTree(node.getLeftChild());
-		System.out.println("Word is ="+node.getWord()+";;;");
+		System.out.println("Word is ="+node.getWord());
 		printTree(node.getRightChild());
 	}
 }

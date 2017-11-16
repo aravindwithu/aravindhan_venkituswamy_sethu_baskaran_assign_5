@@ -35,7 +35,7 @@ public class PalindromeHighlight implements VisitorI{
 	}
 
 	public Object visit(FileProcessor file){
-		System.out.println("Inside PalindromeHighlight");
+		// System.out.println("Inside PalindromeHighlight");
 		// System.out.println("Printing tree===");
     	// tree.printTree(tree.getRoot());
 		while(iter.hasNext()){

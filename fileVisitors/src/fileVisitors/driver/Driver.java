@@ -9,6 +9,7 @@ import fileVisitors.myTree.TreeBuilder;
 import fileVisitors.visitor.PopulateVisitor;
 import fileVisitors.visitor.VisitorI;
 import fileVisitors.visitor.PalindromeHighlight;
+import fileVisitors.visitor.PrimeLength;
 
 /**
 * Driver class contains main method.
@@ -71,7 +72,12 @@ public class Driver
 			Iterator iter = populateVisitor.getList();
 			VisitorI palindromeHighlight = new PalindromeHighlight(myTree, iter);
 			myTree = (TreeBuilder)file.accept(palindromeHighlight);
-			System.out.println("Printing tree===");
+			// System.out.println("Printing tree===");
+    		// myTree.printTree(myTree.getRoot());
+    		
+    		VisitorI primeLength = new PrimeLength(myTree);
+    		myTree = (TreeBuilder)file.accept(primeLength);
+    		System.out.println("Printing tree===");
     		myTree.printTree(myTree.getRoot());
 
 		    // System.out.println("Output files generated successfully.");
