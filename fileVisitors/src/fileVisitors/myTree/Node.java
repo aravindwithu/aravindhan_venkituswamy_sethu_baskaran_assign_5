@@ -32,6 +32,10 @@ public class Node{
 		return word;
 	}
 
+	public void setWord(String wordIn){
+		this.word = wordIn;
+	}
+
 	/**
 	* getNumOfOccurence method.
 	* @return int (numOfOccurence)

@@ -1,12 +1,14 @@
 package fileVisitors.driver;
 
 //Header to import supporting classes.
+import java.util.Iterator;
 import fileVisitors.store.Results;
 import fileVisitors.util.FileProcessor;
 import fileVisitors.util.MyLogger;
 import fileVisitors.myTree.TreeBuilder;
-import fileVisitors.visitor.VisitorI;
 import fileVisitors.visitor.PopulateVisitor;
+import fileVisitors.visitor.VisitorI;
+import fileVisitors.visitor.PalindromeHighlight;
 
 /**
 * Driver class contains main method.
@@ -20,6 +22,7 @@ public class Driver
 	    Results results;
 	    // Object declared for FileProcessor class.
 	    FileProcessor file;
+	    TreeBuilder myTree;
 
 	    try{
 	    	// command line validation for input file and output file respectively.
@@ -61,8 +64,13 @@ public class Driver
 			file = new FileProcessor(inputFile);
 			// defines result object
 			results = new Results(outputFile);
-			VisitorI populateVisitor = new PopulateVisitor();
-			TreeBuilder myTree = (TreeBuilder)file.accept(populateVisitor);
+			PopulateVisitor populateVisitor = new PopulateVisitor();
+			myTree = (TreeBuilder)file.accept(populateVisitor);
+			// System.out.println(populateVisitor.getList());
+			
+			Iterator iter = populateVisitor.getList();
+			VisitorI palindromeHighlight = new PalindromeHighlight(myTree, iter);
+			myTree = (TreeBuilder)file.accept(palindromeHighlight);
 			System.out.println("Printing tree===");
     		myTree.printTree(myTree.getRoot());
 

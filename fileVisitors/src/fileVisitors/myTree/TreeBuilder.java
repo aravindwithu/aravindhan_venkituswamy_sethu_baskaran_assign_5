@@ -79,6 +79,7 @@ public class TreeBuilder {
 		
 		while(currentNode != null)	{
 			int cmpResult = currentNode.getWord().compareTo(word);
+			// int cmpResult = currentNode.getWord().toLowerCase().compareTo(word);
 			if(cmpResult == 0){
 				return currentNode;
 			}
@@ -90,7 +91,20 @@ public class TreeBuilder {
 			}
 		}
 		return null;
+
+		// return getNode(root,word);
 	}
+
+	// public Node getNode(Node node,String word){
+	// 	if(node == null){
+	// 		return null;
+	// 	}
+	// 	getNode(node.getLeftChild(),word);
+	// 	if(node.getWord().equals(word)){
+	// 		return node;
+	// 	}
+	// 	getNode(node.getLeftChild(),word);		
+	// }
 
 	/**
 	* deleteNode public method.
@@ -112,7 +126,7 @@ public class TreeBuilder {
 			return;
 		}
 		printTree(node.getLeftChild());
-		System.out.println("Word is "+node.getWord());
+		System.out.println("Word is ="+node.getWord()+";;;");
 		printTree(node.getRightChild());
 	}
 }
