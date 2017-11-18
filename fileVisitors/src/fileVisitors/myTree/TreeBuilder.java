@@ -2,6 +2,7 @@ package fileVisitors.myTree;
 
 import java.util.ArrayList;
 import fileVisitors.util.MyLogger;
+import fileVisitors.visitor.VisitorI;
 
 public class TreeBuilder {
 	private Node root;
@@ -75,36 +76,43 @@ public class TreeBuilder {
 	* @return Node
 	*/
 	public Node getNode(String word){
-		Node currentNode = root;
+		// Node currentNode = root;
 		
-		while(currentNode != null)	{
-			int cmpResult = currentNode.getWord().compareTo(word);
-			// int cmpResult = currentNode.getWord().toLowerCase().compareTo(word);
-			if(cmpResult == 0){
-				return currentNode;
-			}
-			else if(cmpResult < 0){
-				currentNode = currentNode.getRightChild();
-			}
-			else{
-				currentNode = currentNode.getLeftChild();
-			}
-		}
-		return null;
+		// while(currentNode != null)	{
+		// 	int cmpResult = currentNode.getWord().compareTo(word);
+		// 	// int cmpResult = currentNode.getWord().toLowerCase().compareTo(word);
+		// 	if(cmpResult == 0){
+		// 		return currentNode;
+		// 	}
+		// 	else if(cmpResult < 0){
+		// 		currentNode = currentNode.getRightChild();
+		// 	}
+		// 	else{
+		// 		currentNode = currentNode.getLeftChild();
+		// 	}
+		// }
+		// return null;
 
-		// return getNode(root,word);
+		return _getNode(root,word);
 	}
 
-	// public Node getNode(Node node,String word){
-	// 	if(node == null){
-	// 		return null;
-	// 	}
-	// 	getNode(node.getLeftChild(),word);
-	// 	if(node.getWord().equals(word)){
-	// 		return node;
-	// 	}
-	// 	getNode(node.getLeftChild(),word);		
-	// }
+	public Node _getNode(Node node,String word){
+		if(node == null){
+			return null;
+		}
+		Node nodeLeft = _getNode(node.getLeftChild(),word);
+		if(nodeLeft != null){
+			return nodeLeft;
+		}
+		if(node.getWord().equals(word)){
+			return node;
+		}
+		Node nodeRight = _getNode(node.getRightChild(),word);	
+		if(nodeRight != null){
+			return nodeRight;
+		}
+		return null;	
+	}
 
 	/**
 	* deleteNode public method.
@@ -128,5 +136,10 @@ public class TreeBuilder {
 		printTree(node.getLeftChild());
 		System.out.println("Word is ="+node.getWord());
 		printTree(node.getRightChild());
+	}
+
+
+	public void accept(VisitorI visitor){
+		visitor.visit(this);
 	}
 }

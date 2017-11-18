@@ -1,11 +1,11 @@
 package fileVisitors.visitor;
 
-import fileVisitors.util.FileProcessor;
+import fileVisitors.myTree.TreeBuilder;
 
 /**
 * VisitorI interface.
 * Created for cs542 - Design patterns, Assignment 5.
 */
 public interface VisitorI{
-	public Object visit(FileProcessor file);
+	public void visit(TreeBuilder tree);
 }

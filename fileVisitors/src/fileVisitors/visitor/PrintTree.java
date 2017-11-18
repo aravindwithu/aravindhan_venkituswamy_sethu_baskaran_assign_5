@@ -10,10 +10,7 @@ import fileVisitors.myTree.Node;
 */
 public class PrintTree implements VisitorI{
 
-	private TreeBuilder tree;
-
-	public PrintTree(TreeBuilder treeIn){
-		tree = treeIn;
+	public PrintTree(){
 		MyLogger.writeMessage("Inside PrintTree constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
@@ -22,13 +19,13 @@ public class PrintTree implements VisitorI{
 			return;
 		}
 		printTree(node.getLeftChild());
-		System.out.println("Word is ="+node.getWord());
+		System.out.println(node.getWord());
 		printTree(node.getRightChild());
 	}
 
-	public Object visit(FileProcessor file){
-		System.out.println("Priting within   visitor +===");
+	public void visit(TreeBuilder tree){
+		// System.out.println("Priting within visitor +===");
 		printTree(tree.getRoot());
-		return tree;
+		// return tree;
 	}
 }

@@ -24,7 +24,6 @@ public class Driver
 	    Results results;
 	    // Object declared for FileProcessor class.
 	    FileProcessor file;
-	    TreeBuilder myTree;
 
 	    try{
 	    	// command line validation for input file and output file respectively.
@@ -66,23 +65,26 @@ public class Driver
 			file = new FileProcessor(inputFile);
 			// defines result object
 			results = new Results(outputFile);
+
+			TreeBuilder myTree = new TreeBuilder();
 			PopulateVisitor populateVisitor = new PopulateVisitor();
-			myTree = (TreeBuilder)file.accept(populateVisitor);
+			populateVisitor.setFile(file);
+			myTree.accept(populateVisitor);
 			// System.out.println(populateVisitor.getList());
 			
 			Iterator iter = populateVisitor.getList();
-			VisitorI palindromeHighlight = new PalindromeHighlight(myTree, iter);
-			myTree = (TreeBuilder)file.accept(palindromeHighlight);
+			VisitorI palindromeHighlight = new PalindromeHighlight(iter);
+			myTree.accept(palindromeHighlight);
 			// System.out.println("Printing tree===");
     		// myTree.printTree(myTree.getRoot());
     		
-    		VisitorI primeLength = new PrimeLength(myTree);
-    		myTree = (TreeBuilder)file.accept(primeLength);
+    		VisitorI primeLength = new PrimeLength();
+    		myTree.accept(primeLength);
     		// System.out.println("Printing tree===");
     		// myTree.printTree(myTree.getRoot());
 
-    		VisitorI printTree = new PrintTree(myTree);
-    		myTree = (TreeBuilder)file.accept(printTree);
+    		VisitorI printTree = new PrintTree();
+    		myTree.accept(printTree);
 
 		    // System.out.println("Output files generated successfully.");
 	    }

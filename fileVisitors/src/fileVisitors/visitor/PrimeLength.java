@@ -10,10 +10,8 @@ import fileVisitors.myTree.Node;
 * Created for cs542 - Design patterns, Assignment 5.
 */
 public class PrimeLength implements VisitorI{
-	private TreeBuilder tree;
 
-	public PrimeLength(TreeBuilder treeIn){
-		tree = treeIn;
+	public PrimeLength(){
 		MyLogger.writeMessage("Inside PrimeLength constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
@@ -43,11 +41,11 @@ public class PrimeLength implements VisitorI{
 		primedTree(node.getRightChild());
 	}
 
-	public Object visit(FileProcessor file){
+	public void visit(TreeBuilder tree){
 		// System.out.println("Printing tree===");
     	// tree.printTree(tree.getRoot());
     	primedTree(tree.getRoot());
-		return tree;
+		// return tree;
 	}
 
 }

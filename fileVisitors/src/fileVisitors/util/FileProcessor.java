@@ -68,9 +68,6 @@ public class FileProcessor{
 	  	}
 	}
 
-	public Object accept(VisitorI visitor){
-		return visitor.visit(this);
-	}
 
 	/**
 	* closeFile method.

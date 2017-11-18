@@ -12,16 +12,21 @@ import java.util.Iterator;
 * Created for cs542 - Design patterns, Assignment 5.
 */
 public class PopulateVisitor implements VisitorI{
-	private TreeBuilder tree;
+	// private TreeBuilder tree;
+	private FileProcessor file;
 	private ArrayList<String> wordsGte3Chars;
 
 	public PopulateVisitor(){
-		tree = new TreeBuilder();
+		// tree = treeIn;
 		wordsGte3Chars = new ArrayList<String>();
 		MyLogger.writeMessage("Inside PopulateVisitor constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
-	public Object visit(FileProcessor file){
+	public void setFile(FileProcessor fileIn){
+		file = fileIn;
+	}
+
+	public void visit(TreeBuilder tree){
 		String line;
 		while ((line = file.readLine(true)) != null)
 	    {		    
@@ -37,7 +42,7 @@ public class PopulateVisitor implements VisitorI{
     	}
     	// System.out.println("Printing tree===");
     	// tree.printTree(tree.getRoot());
-		return tree;
+		// return tree;
 	}
 
 	public Iterator getList(){

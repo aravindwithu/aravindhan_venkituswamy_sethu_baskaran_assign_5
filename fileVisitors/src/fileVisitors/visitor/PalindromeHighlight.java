@@ -12,11 +12,9 @@ import java.util.Iterator;
 */
 public class PalindromeHighlight implements VisitorI{
 
-	private TreeBuilder tree;
 	private Iterator iter;
 
-	public PalindromeHighlight(TreeBuilder treeIn,Iterator iterIn){
-		tree = treeIn;
+	public PalindromeHighlight(Iterator iterIn){
 		iter = iterIn;
 		MyLogger.writeMessage("Inside PalindromeHighlight constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
@@ -34,7 +32,7 @@ public class PalindromeHighlight implements VisitorI{
 		return true;
 	}
 
-	public Object visit(FileProcessor file){
+	public void visit(TreeBuilder tree){
 		// System.out.println("Inside PalindromeHighlight");
 		// System.out.println("Printing tree===");
     	// tree.printTree(tree.getRoot());
@@ -52,7 +50,7 @@ public class PalindromeHighlight implements VisitorI{
 				// System.out.println("++++left is "+node.getLeftChild().getWord());
 			}
 		}
-		return tree;
+		// return tree;
 	}
 
 }
