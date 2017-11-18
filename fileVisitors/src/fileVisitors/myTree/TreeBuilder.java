@@ -49,7 +49,6 @@ public class TreeBuilder {
 		}
 		int cmpResult =  word.compareTo(root.getWord());
 		if(cmpResult == 0){
-       		root.incrementCount();
         	return root;
        	}else{
         	if (0 > cmpResult){
@@ -76,23 +75,6 @@ public class TreeBuilder {
 	* @return Node
 	*/
 	public Node getNode(String word){
-		// Node currentNode = root;
-		
-		// while(currentNode != null)	{
-		// 	int cmpResult = currentNode.getWord().compareTo(word);
-		// 	// int cmpResult = currentNode.getWord().toLowerCase().compareTo(word);
-		// 	if(cmpResult == 0){
-		// 		return currentNode;
-		// 	}
-		// 	else if(cmpResult < 0){
-		// 		currentNode = currentNode.getRightChild();
-		// 	}
-		// 	else{
-		// 		currentNode = currentNode.getLeftChild();
-		// 	}
-		// }
-		// return null;
-
 		return _getNode(root,word);
 	}
 
@@ -104,7 +86,7 @@ public class TreeBuilder {
 		if(nodeLeft != null){
 			return nodeLeft;
 		}
-		if(node.getWord().equals(word)){
+		if(node.getWord().equalsIgnoreCase(word)){
 			return node;
 		}
 		Node nodeRight = _getNode(node.getRightChild(),word);	
@@ -112,21 +94,6 @@ public class TreeBuilder {
 			return nodeRight;
 		}
 		return null;	
-	}
-
-	/**
-	* deleteNode public method.
-	* Deletes the node from tree (Only updates and changes number of occurences).
-	* @param word (String)
-	*/
-	public void deleteWord(String word){
-			if(root == null){
-				return;
-			}
-			Node node = getNode(word);
-			if(node != null){
-				node.decrementCount();
-			}			
 	}
 
 	public void printTree(Node node){
@@ -137,7 +104,6 @@ public class TreeBuilder {
 		System.out.println("Word is ="+node.getWord());
 		printTree(node.getRightChild());
 	}
-
 
 	public void accept(VisitorI visitor){
 		visitor.visit(this);

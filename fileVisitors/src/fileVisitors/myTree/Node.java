@@ -4,8 +4,6 @@ import fileVisitors.util.MyLogger;
 
 public class Node{
 	private String word;
-	private int wordLength;
-	private int numOfOccurence;
 	private Node leftChild;
 	private Node rightChild;
 
@@ -17,8 +15,6 @@ public class Node{
 	*/
 	public Node(String newWord){
 		word = newWord;
-		wordLength = word.length();
-		numOfOccurence = 1;
 		leftChild = null;
 		rightChild = null;	
 		MyLogger.writeMessage("Inside Node constructor",MyLogger.DebugLevel.CONSTRUCTOR);	
@@ -34,40 +30,6 @@ public class Node{
 
 	public void setWord(String wordIn){
 		this.word = wordIn;
-	}
-
-	/**
-	* getNumOfOccurence method.
-	* @return int (numOfOccurence)
-	*/
-	public int getNumOfOccurence(){
-		return numOfOccurence;
-	}
-
-	/**
-	* getWordLength method.
-	* @return int (wordLength)
-	*/
-	public int getWordLength(){
-		return wordLength;
-	}
-
-	/**
-	* incrementCount method.
-	* increments numOfOccurence by 1. 
-	*/
-	public void incrementCount(){
-		numOfOccurence++;
-	}
-
-	/**
-	* decrementCount method.
-	* decrements numOfOccurence by 1. 
-	*/
-	public void decrementCount(){
-		if(numOfOccurence > 0){
-			numOfOccurence--;	
-		}		
 	}
 
 	/**

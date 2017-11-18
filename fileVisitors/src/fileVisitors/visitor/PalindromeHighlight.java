@@ -34,8 +34,6 @@ public class PalindromeHighlight implements VisitorI{
 
 	public void visit(TreeBuilder tree){
 		// System.out.println("Inside PalindromeHighlight");
-		// System.out.println("Printing tree===");
-    	// tree.printTree(tree.getRoot());
 		while(iter.hasNext()){
 			String string = (String) iter.next();
 			// System.out.println("Strin is "+string);
@@ -43,14 +41,9 @@ public class PalindromeHighlight implements VisitorI{
 				// Capitalize
 				System.out.println("Plaindrom is == "+ string);
 				Node node = tree.getNode(string);
-				if(node != null){
-					System.out.println("Node is "+node.getWord());
-					node.setWord(string.toUpperCase());	
-				}
-				// System.out.println("++++left is "+node.getLeftChild().getWord());
+				System.out.println("Node is "+node.getWord());
+				node.setWord(string.toUpperCase());	
 			}
 		}
-		// return tree;
 	}
-
 }

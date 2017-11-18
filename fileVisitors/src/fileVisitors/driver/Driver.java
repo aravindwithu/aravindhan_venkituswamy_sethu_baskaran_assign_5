@@ -70,7 +70,6 @@ public class Driver
 			PopulateVisitor populateVisitor = new PopulateVisitor();
 			populateVisitor.setFile(file);
 			myTree.accept(populateVisitor);
-			// System.out.println(populateVisitor.getList());
 			
 			Iterator iter = populateVisitor.getList();
 			VisitorI palindromeHighlight = new PalindromeHighlight(iter);
@@ -85,7 +84,6 @@ public class Driver
 
     		VisitorI printTree = new PrintTree();
     		myTree.accept(printTree);
-
 		    // System.out.println("Output files generated successfully.");
 	    }
 	    catch(Exception ex){

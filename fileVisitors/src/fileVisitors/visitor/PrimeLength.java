@@ -42,10 +42,7 @@ public class PrimeLength implements VisitorI{
 	}
 
 	public void visit(TreeBuilder tree){
-		// System.out.println("Printing tree===");
-    	// tree.printTree(tree.getRoot());
     	primedTree(tree.getRoot());
-		// return tree;
 	}
 
 }
