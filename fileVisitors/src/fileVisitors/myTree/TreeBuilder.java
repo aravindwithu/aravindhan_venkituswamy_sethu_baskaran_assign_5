@@ -61,48 +61,25 @@ public class TreeBuilder {
        	}
 	}
 
-	/**
-	* returns root node of the tree.
-	* @return Node (root).
-	*/
 	public Node getRoot(){
 		return root;
 	}
 
-	/**
-	* returns the Node for the given word.
-	* @param word (String)
-	* @return Node
-	*/
 	public Node getNode(String word){
-		return _getNode(root,word);
-	}
-
-	public Node _getNode(Node node,String word){
-		if(node == null){
-			return null;
-		}
-		Node nodeLeft = _getNode(node.getLeftChild(),word);
-		if(nodeLeft != null){
-			return nodeLeft;
-		}
-		if(node.getWord().equalsIgnoreCase(word)){
-			return node;
-		}
-		Node nodeRight = _getNode(node.getRightChild(),word);	
-		if(nodeRight != null){
-			return nodeRight;
+		Node currentNode = root;
+		while(currentNode != null)	{
+			int cmpResult = currentNode.getWord().compareTo(word);
+			if(cmpResult == 0){
+				return currentNode;
+			}
+			else if(cmpResult < 0){
+				currentNode = currentNode.getRightChild();
+			}
+			else{
+				currentNode = currentNode.getLeftChild();
+			}
 		}
 		return null;	
-	}
-
-	public void printTree(Node node){
-		if(node == null){
-			return;
-		}
-		printTree(node.getLeftChild());
-		System.out.println("Word is ="+node.getWord());
-		printTree(node.getRightChild());
 	}
 
 	public void accept(VisitorI visitor){

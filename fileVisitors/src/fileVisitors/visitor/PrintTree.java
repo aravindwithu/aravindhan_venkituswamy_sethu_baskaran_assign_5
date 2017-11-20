@@ -4,13 +4,15 @@ import fileVisitors.util.MyLogger;
 import fileVisitors.util.FileProcessor;
 import fileVisitors.myTree.TreeBuilder;
 import fileVisitors.myTree.Node;
+import fileVisitors.store.Results;
 /**
 * PrintTree class.
 * Created for cs542 - Design patterns, Assignment 5.
 */
 public class PrintTree implements VisitorI{
-
-	public PrintTree(){
+	private Results results;
+	public PrintTree(Results resultsIn){
+		results = resultsIn;
 		MyLogger.writeMessage("Inside PrintTree constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
@@ -20,6 +22,7 @@ public class PrintTree implements VisitorI{
 		}
 		printTree(node.getLeftChild());
 		System.out.println(node.getWord());
+		results.storeNewResult(node.getWord());
 		printTree(node.getRightChild());
 	}
 

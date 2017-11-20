@@ -1,68 +1,120 @@
 package fileVisitors.store;
 
+//Header to import supporting classes.
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.io.PrintWriter;
 import fileVisitors.util.FileDisplayInterface;
-import fileVisitors.util.MyLogger;
 import fileVisitors.util.StdoutDisplayInterface;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 
-import java.io.IOException;
-
-public class Results implements FileDisplayInterface,StdoutDisplayInterface{
-
-	private ArrayList<String> resultStore = null;
-	private BufferedWriter bwriter = null;
-	
+/**
+* Results class.
+* Created for cs542 - Design patterns.
+* Results class to process results of the test case.
+* Implements FileDisplayInterface and StdoutDisplayInterface interfaces.
+*/
+public class Results implements FileDisplayInterface, StdoutDisplayInterface{
+	private ArrayList<String> resultArray = new ArrayList<String>();// string array to store results.
+	private PrintWriter writer;// writer object to write to file.
 	/**
-	* Constructor for Results class.
-	* Gets the file object and initializes the required objects for respective class.
-	* @param file (FileProcessor).
+	* Results constructor to intialize Results class.
+	* Calls intializeArray.
 	*/
-	public Results(String file){
-		this.resultStore = new ArrayList<String>();
+	public Results(String outputFile){
 		try{
-			this.bwriter = new BufferedWriter(new FileWriter(file));
-			MyLogger.writeMessage("Inside Results constructor",MyLogger.DebugLevel.CONSTRUCTOR);
-		}catch(Exception e){
-			e.printStackTrace();
-			System.err.println("Error in writing file");
-			System.exit(1);
+			// Object for PrintWriter is intialized with respective output file name and encoding format.
+			// To write original Tree to the output file.
+			writer = new PrintWriter(outputFile, "UTF-8");
+			intializeArray();
+		}catch(Exception ex){
+	    	System.err.println(ex.getMessage());// prints the error message.
+	    	ex.printStackTrace();// prints stack trace.
+	    	System.exit(0);
+	    }
+	}
+	/**
+	* intializeArray method.
+	* intializes resultArray with empty string.
+	*/
+	private void intializeArray(){
+		for(int i=0; i < resultArray.size(); i++){
+			resultArray.set(i, "");
+		}
+	}
+	/**
+	* storeNewResult method.
+	* Stores the given value in given index.
+	* @param value of string to be stored.
+	*/
+	public void storeNewResult(String value){
+		resultArray.add(value);
+	}
+
+	public Iterator getIterator(){
+		 Iterator iter = resultArray.iterator();
+		 return iter;
+	}
+
+	public void closeWriter(){
+		try{
+			writer.close();
+		}catch(Exception ex){
+	    	System.err.println(ex.getMessage());// prints the error message.
+	    	ex.printStackTrace();// prints stack trace.
+	    	System.exit(0);
+	    }
+	    finally{// Clears all the objects created.
+		    writer = null;
+	    }
+	}
+
+		/**
+	* printAll method.
+	* prints all the values in resultArray to command line.
+	*/
+	public void printAll(){
+		for(int i = 0; i < resultArray.size(); i++){
+			writeToScreen(resultArray.get(i));
 		}
 	}
 
-	// Adds the student detail as a whole to the list
-	public void storeNewResult(String string){
-		this.resultStore.add(string);
-	}
-
-	// Returns the list of students in tree b_number along with course details
-	public ArrayList<String> getresultStore(){
-		return this.resultStore;
-	}
-
-	// Writes a string to output file
-	public void writeSchedulesToFile(String string){
+	/**
+	* writeAll method.
+	* writes all the values in resultArray to output file.
+	*/
+	public void writeAll(){
 		try{
-			// MyLogger.writeMessage(string,MyLogger.DebugLevel.FILE_WRITE);
-			bwriter.write(string);
-			bwriter.newLine();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+			for(int i = 0; i < resultArray.size(); i++){
+				writeSchedulesToFile(resultArray.get(i));
+			}
+			writer.close();
+		}catch(Exception ex){
+	    	System.err.println(ex.getMessage());// prints the error message.
+	    	ex.printStackTrace();// prints stack trace.
+	    	System.exit(0);
+	    }
+	    finally{// Clears all the objects created.
+		    writer = null;
+	    }
 	}
-
-	// Writes a string to stdout
-	public void writeToScreen(String string){
-		System.out.println(string);
+	/**
+	* writeToScreen method.
+	* Implements StdoutDisplayInterface writeToScreen method.
+	* gets String s as argument.
+	* prints the given string to command line.
+	* @param s to print the same to output command line.
+	*/
+	public void writeToScreen(String s){
+		System.out.println(s);
 	}
-
-	// Closes the writer stream
-	public void closeFile(){
-		try{
-			bwriter.close();	
-		}
-		catch(IOException ignore){}		
+	/**
+	* writeToFile method.
+	* Implements FileDisplayInterface writeToFile method.
+	* gets String s as argument.
+	* writes the given string to output file.
+	* @param s to be writtern to the writer object. 
+	*/
+	public void writeSchedulesToFile(String s){
+			writer.println(s);
 	}
-
 }

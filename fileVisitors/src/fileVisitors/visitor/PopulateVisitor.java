@@ -14,12 +14,9 @@ public class PopulateVisitor implements VisitorI{
 
 	private FileProcessor file;
 
-	public PopulateVisitor(){
-		MyLogger.writeMessage("Inside PopulateVisitor constructor",MyLogger.DebugLevel.CONSTRUCTOR);
-	}
-
-	public void setFile(FileProcessor fileIn){
+	public PopulateVisitor(FileProcessor fileIn){
 		file = fileIn;
+		MyLogger.writeMessage("Inside PopulateVisitor constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
 	public void visit(TreeBuilder tree){

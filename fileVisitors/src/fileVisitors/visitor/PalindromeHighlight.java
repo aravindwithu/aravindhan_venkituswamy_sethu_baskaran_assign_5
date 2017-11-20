@@ -34,10 +34,9 @@ public class PalindromeHighlight implements VisitorI{
 			highlightPalindrome(currentNode.getLeftChild());
 			String word = currentNode.getWord();
 			if(checkPalindrome(word)){
-				// Capitalize
-				System.out.println("Plaindrom is == "+ word);
+				//System.out.println("Plaindrom is == "+ word);
 				currentNode.setWord(word.toUpperCase());
-				System.out.println("Capitalized to "+ currentNode.getWord());
+				//System.out.println("Capitalized to "+ currentNode.getWord());
 			}
 			highlightPalindrome(currentNode.getRightChild());
 		}

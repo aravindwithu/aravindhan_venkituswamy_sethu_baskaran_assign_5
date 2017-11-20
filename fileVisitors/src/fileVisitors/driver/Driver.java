@@ -6,8 +6,8 @@ import fileVisitors.store.Results;
 import fileVisitors.util.FileProcessor;
 import fileVisitors.util.MyLogger;
 import fileVisitors.myTree.TreeBuilder;
-import fileVisitors.visitor.PopulateVisitor;
 import fileVisitors.visitor.VisitorI;
+import fileVisitors.visitor.PopulateVisitor;
 import fileVisitors.visitor.PalindromeHighlight;
 import fileVisitors.visitor.PrimeLength;
 import fileVisitors.visitor.PrintTree;
@@ -67,8 +67,7 @@ public class Driver
 			results = new Results(outputFile);
 			TreeBuilder myTree = new TreeBuilder();
 
-			PopulateVisitor populateVisitor = new PopulateVisitor();
-			populateVisitor.setFile(file);
+			VisitorI populateVisitor = new PopulateVisitor(file);
 			myTree.accept(populateVisitor);
 
 			VisitorI palindromeHighlight = new PalindromeHighlight();
@@ -77,8 +76,16 @@ public class Driver
     		VisitorI primeLength = new PrimeLength();
     		myTree.accept(primeLength);
 
-    		VisitorI printTree = new PrintTree();
+    		VisitorI printTree = new PrintTree(results);
     		myTree.accept(printTree);
+
+    		// writeAll method from Results class is called with writer object to write the test case results to the output file.
+    		Iterator iter = results.getIterator();
+    		while(iter.hasNext()){
+				String resultStr = (String) iter.next();
+				results.writeSchedulesToFile(resultStr);
+			}
+			results.closeWriter();
 	    }
 	    catch(Exception ex){
 	    	System.err.println(ex.getMessage());// prints the error message.
