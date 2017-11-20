@@ -12,10 +12,7 @@ import java.util.Iterator;
 */
 public class PalindromeHighlight implements VisitorI{
 
-	private Iterator iter;
-
-	public PalindromeHighlight(Iterator iterIn){
-		iter = iterIn;
+	public PalindromeHighlight(){
 		MyLogger.writeMessage("Inside PalindromeHighlight constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
@@ -32,18 +29,21 @@ public class PalindromeHighlight implements VisitorI{
 		return true;
 	}
 
-	public void visit(TreeBuilder tree){
-		// System.out.println("Inside PalindromeHighlight");
-		while(iter.hasNext()){
-			String string = (String) iter.next();
-			// System.out.println("Strin is "+string);
-			if(checkPalindrome(string)){
+	public void highlightPalindrome(Node currentNode){
+		if(currentNode != null){
+			highlightPalindrome(currentNode.getLeftChild());
+			String word = currentNode.getWord();
+			if(checkPalindrome(word)){
 				// Capitalize
-				System.out.println("Plaindrom is == "+ string);
-				Node node = tree.getNode(string);
-				System.out.println("Node is "+node.getWord());
-				node.setWord(string.toUpperCase());	
+				System.out.println("Plaindrom is == "+ word);
+				currentNode.setWord(word.toUpperCase());
+				System.out.println("Capitalized to "+ currentNode.getWord());
 			}
+			highlightPalindrome(currentNode.getRightChild());
 		}
+	}
+
+	public void visit(TreeBuilder tree){
+		highlightPalindrome(tree.getRoot());
 	}
 }

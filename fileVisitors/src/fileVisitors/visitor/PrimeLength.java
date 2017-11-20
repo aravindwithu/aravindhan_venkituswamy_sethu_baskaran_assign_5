@@ -34,7 +34,6 @@ public class PrimeLength implements VisitorI{
 		}
 		primedTree(node.getLeftChild());
 		if(checkPrimelength(node.getWord())){
-			// System.out.println("Prim word is="+node.getWord());
 			String primeString = node.getWord() + "-PRIME";
 			node.setWord(primeString);
 		}

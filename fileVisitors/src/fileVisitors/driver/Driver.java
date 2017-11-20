@@ -65,26 +65,20 @@ public class Driver
 			file = new FileProcessor(inputFile);
 			// defines result object
 			results = new Results(outputFile);
-
 			TreeBuilder myTree = new TreeBuilder();
+
 			PopulateVisitor populateVisitor = new PopulateVisitor();
 			populateVisitor.setFile(file);
 			myTree.accept(populateVisitor);
-			
-			Iterator iter = populateVisitor.getList();
-			VisitorI palindromeHighlight = new PalindromeHighlight(iter);
+
+			VisitorI palindromeHighlight = new PalindromeHighlight();
 			myTree.accept(palindromeHighlight);
-			// System.out.println("Printing tree===");
-    		// myTree.printTree(myTree.getRoot());
     		
     		VisitorI primeLength = new PrimeLength();
     		myTree.accept(primeLength);
-    		// System.out.println("Printing tree===");
-    		// myTree.printTree(myTree.getRoot());
 
     		VisitorI printTree = new PrintTree();
     		myTree.accept(printTree);
-		    // System.out.println("Output files generated successfully.");
 	    }
 	    catch(Exception ex){
 	    	System.err.println(ex.getMessage());// prints the error message.
