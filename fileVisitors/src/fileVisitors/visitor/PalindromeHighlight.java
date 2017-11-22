@@ -32,7 +32,7 @@ public class PalindromeHighlight implements VisitorI{
 		int start = 0;
 		int end = word.length()-1;
 		while(start < end){
-			if(word.charAt(start) != word.charAt(end)){
+			if(Character.toLowerCase(word.charAt(start)) != Character.toLowerCase(word.charAt(end))){
 				return false;
 			}
 			start++;
