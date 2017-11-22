@@ -75,18 +75,23 @@ public class TreeBuilder {
 	* @return Node
 	*/
 	public Node getNode(String word){
-		Node currentNode = root;
-		while(currentNode != null)	{
-			int cmpResult = currentNode.getWord().compareTo(word);
-			if(cmpResult == 0){
-				return currentNode;
-			}
-			else if(cmpResult < 0){
-				currentNode = currentNode.getRightChild();
-			}
-			else{
-				currentNode = currentNode.getLeftChild();
-			}
+		return getNode(root,word);
+	}
+
+	private Node getNode(Node node,String word){
+		if(node == null){
+			return null;
+		}
+		Node nodeLeft = getNode(node.getLeftChild(),word);
+		if(nodeLeft != null){
+			return nodeLeft;
+		}
+		if(node.getWord().equalsIgnoreCase(word)){
+			return node;
+		}
+		Node nodeRight = getNode(node.getRightChild(),word);	
+		if(nodeRight != null){
+			return nodeRight;
 		}
 		return null;	
 	}

@@ -26,6 +26,9 @@ public class PalindromeHighlight implements VisitorI{
 	* @return boolean
 	*/
 	private boolean checkPalindrome(String word){
+		if(word.length() <= 3){
+			return false;
+		}
 		int start = 0;
 		int end = word.length()-1;
 		while(start < end){
@@ -48,10 +51,8 @@ public class PalindromeHighlight implements VisitorI{
 			highlightPalindrome(currentNode.getLeftChild());
 			String word = currentNode.getWord();
 			if(checkPalindrome(word)){
-				//System.out.println("Plaindrom is == "+ word);
 				currentNode.setWord(word.toUpperCase());
 				MyLogger.writeMessage("Palindrome Highlight - "+currentNode.getWord(),MyLogger.DebugLevel.PALINDROME_HIGHLIGHT);
-				//System.out.println("Capitalized to "+ currentNode.getWord());
 			}
 			highlightPalindrome(currentNode.getRightChild());
 		}

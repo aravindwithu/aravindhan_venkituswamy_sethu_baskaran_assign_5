@@ -1,7 +1,6 @@
 package fileVisitors.driver;
 
 //Header to import supporting classes.
-import java.util.Iterator;
 import fileVisitors.store.Results;
 import fileVisitors.util.FileProcessor;
 import fileVisitors.util.MyLogger;
@@ -82,17 +81,6 @@ public class Driver
 
     		VisitorI printTree = new PrintTree(results);
     		myTree.accept(printTree);
-
-    		// Results class is called with writer object to write the results to the output file.
-    		Iterator iter = results.getIterator();
-    		while(iter.hasNext()){
-				String resultStr = (String) iter.next();
-				results.writeSchedulesToFile(resultStr);
-				if(logger == 2){
-					results.writeToScreen(resultStr);
-				}
-			}
-			results.closeWriter();// closes file
 	    }
 	    catch(Exception ex){
 	    	System.err.println(ex.getMessage());// prints the error message.

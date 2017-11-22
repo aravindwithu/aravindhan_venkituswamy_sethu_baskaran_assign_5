@@ -31,8 +31,10 @@ public class PrintTree implements VisitorI{
 			return;
 		}
 		printTree(node.getLeftChild());
-		System.out.println(node.getWord());
-		results.storeNewResult(node.getWord());
+		String word = node.getWord();
+		results.storeNewResult(word);
+		results.writeToScreen(word);
+		results.writeSchedulesToFile(word);
 		printTree(node.getRightChild());
 	}
 
@@ -44,5 +46,6 @@ public class PrintTree implements VisitorI{
 	public void visit(TreeBuilder tree){
 		// System.out.println("Priting within visitor +===");
 		printTree(tree.getRoot());
+		results.closeWriter();// closes file
 	}
 }
