@@ -14,11 +14,20 @@ public class PopulateVisitor implements VisitorI{
 
 	private FileProcessor file;
 
+	/**
+	* PopulateVisitor constructor to intialize PopulateVisitor class.
+	* @param fileIn (FileProcessor)
+	*/
 	public PopulateVisitor(FileProcessor fileIn){
-		file = fileIn;
 		MyLogger.writeMessage("Inside PopulateVisitor constructor",MyLogger.DebugLevel.CONSTRUCTOR);
+		file = fileIn;
 	}
 
+	/**
+	* visit method.
+	* Vist method for visitor pattern.
+	* @param TreeBuilder (tree)
+	*/
 	public void visit(TreeBuilder tree){
 		String line;
 		while ((line = file.readLine(true)) != null)

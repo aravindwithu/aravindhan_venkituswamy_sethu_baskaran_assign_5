@@ -14,10 +14,10 @@ public class Node{
 	* @param newWord (String)
 	*/
 	public Node(String newWord){
+		MyLogger.writeMessage("Inside Node constructor",MyLogger.DebugLevel.CONSTRUCTOR);	
 		word = newWord;
 		leftChild = null;
-		rightChild = null;	
-		MyLogger.writeMessage("Inside Node constructor",MyLogger.DebugLevel.CONSTRUCTOR);	
+		rightChild = null;
 	}
 
 	/**
@@ -28,6 +28,10 @@ public class Node{
 		return word;
 	}
 
+	/**
+	* setWord method.
+	* @param wordIn (String)
+	*/
 	public void setWord(String wordIn){
 		this.word = wordIn;
 	}

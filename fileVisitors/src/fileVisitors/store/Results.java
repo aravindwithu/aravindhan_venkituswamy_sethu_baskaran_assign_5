@@ -4,6 +4,7 @@ package fileVisitors.store;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.PrintWriter;
+import fileVisitors.util.MyLogger;
 import fileVisitors.util.FileDisplayInterface;
 import fileVisitors.util.StdoutDisplayInterface;
 
@@ -22,6 +23,7 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface{
 	*/
 	public Results(String outputFile){
 		try{
+			MyLogger.writeMessage("Inside Results constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 			// Object for PrintWriter is intialized with respective output file name and encoding format.
 			// To write original Tree to the output file.
 			writer = new PrintWriter(outputFile, "UTF-8");
@@ -50,11 +52,17 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface{
 		resultArray.add(value);
 	}
 
+	/**
+	* getIterator method.
+	* @return Iterator (iter)
+	*/
 	public Iterator getIterator(){
 		 Iterator iter = resultArray.iterator();
 		 return iter;
 	}
-
+	/**
+	* closeWriter method.
+	*/
 	public void closeWriter(){
 		try{
 			writer.close();
@@ -68,7 +76,7 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface{
 	    }
 	}
 
-		/**
+	/**
 	* printAll method.
 	* prints all the values in resultArray to command line.
 	*/
@@ -105,7 +113,8 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface{
 	* @param s to print the same to output command line.
 	*/
 	public void writeToScreen(String s){
-		System.out.println(s);
+		//System.out.println(s);
+		MyLogger.writeMessage("Result debuging - "+s,MyLogger.DebugLevel.FILE_WRITE);
 	}
 	/**
 	* writeToFile method.
@@ -115,6 +124,6 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface{
 	* @param s to be writtern to the writer object. 
 	*/
 	public void writeSchedulesToFile(String s){
-			writer.println(s);
+		writer.println(s);
 	}
 }

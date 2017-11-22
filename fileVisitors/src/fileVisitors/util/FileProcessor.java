@@ -17,6 +17,7 @@ public class FileProcessor{
 	public FileProcessor(String filename){
 		File fileCheck;
 		try{
+			MyLogger.writeMessage("Inside FileProcessor constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 			// Check if file doesn't exist
 			fileCheck = new File(filename);
 			if(!fileCheck.exists() || fileCheck.isDirectory()) {
@@ -25,7 +26,6 @@ public class FileProcessor{
 			}
 			file = new BufferedReader(new FileReader(filename));
 			isFileOpen = true;
-			MyLogger.writeMessage("Inside FileProcessor constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 		}
 		catch (Exception ex)
 	  	{
@@ -67,8 +67,6 @@ public class FileProcessor{
 	    	return null;
 	  	}
 	}
-
-
 	/**
 	* closeFile method.
 	* closes the file object.

@@ -11,11 +11,21 @@ import fileVisitors.store.Results;
 */
 public class PrintTree implements VisitorI{
 	private Results results;
+
+	/**
+	* PrintTree constructor to intialize PrintTree class.
+	* @param resultsIn (Results)
+	*/
 	public PrintTree(Results resultsIn){
-		results = resultsIn;
 		MyLogger.writeMessage("Inside PrintTree constructor",MyLogger.DebugLevel.CONSTRUCTOR);
+		results = resultsIn;
 	}
 
+	/**
+	* printTree method.
+	* printTree method to print the tree in inorder traversal (ascending).
+	* @param node (Node)
+	*/
 	private void printTree(Node node){
 		if(node == null){
 			return;
@@ -26,6 +36,11 @@ public class PrintTree implements VisitorI{
 		printTree(node.getRightChild());
 	}
 
+	/**
+	* visit method.
+	* Vist method for visitor pattern.
+	* @param TreeBuilder (tree)
+	*/
 	public void visit(TreeBuilder tree){
 		// System.out.println("Priting within visitor +===");
 		printTree(tree.getRoot());

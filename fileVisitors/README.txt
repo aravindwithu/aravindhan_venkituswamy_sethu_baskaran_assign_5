@@ -44,6 +44,39 @@ offense.”
 Provide justification for Data Structures used in this assignment in
 term of Big O complexity (time and/or space)
 
+In Result - ArrayList is used 
+
+Add      : O(1)
+Remove   : O(n)
+Get      : O(1)
+Contains : O(n)
+
+Used Binary Search Tree - BST: The advantage of binary search trees over other data structures is that the insert & delete operations are in sorting order, so that the search algorithms such as inorder traversal and relavent future insertion & deletion operations can be very efficient (logarithm), i.e; at most of the times, the above mentioned operation tend to skip half of the tree, they are also easy to code as well.
+
+WorstCase:
+Insert: O(n)	
+Delete: O(n)
+Search: O(n)
+
+AverageCase:
+Insert: O(log n)	
+Delete: O(log n)
+Search: O(log n)
+
+BestCase:
+Insert: O(log n)	
+Delete: O(log n)
+Search: O(log n)
+
+Debug Value to logger:
+
+4 [Print to stdout everytime a constructor is called]
+3 [Prints the prime length words]
+2 [Print to stdout before writing to file]
+1 [prints the palimdrome words]
+0 [No output should be printed from the applicatio to stdout. It is ok to write to the output file though" ]
+
+
 -----------------------------------------------------------------------
 
 Provide list of citations (urls, etc.) from where you have taken code

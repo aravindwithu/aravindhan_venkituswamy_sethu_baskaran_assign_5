@@ -12,8 +12,8 @@ public class TreeBuilder {
 	* Intializes the root object for original, backup 1 and backup 2 trees to null.
 	*/
 	public TreeBuilder(){
-		root = null;
 		MyLogger.writeMessage("Inside TreeBuilder constructor",MyLogger.DebugLevel.CONSTRUCTOR);
+		root = null;
 	}
 
 	/**
@@ -61,10 +61,19 @@ public class TreeBuilder {
        	}
 	}
 
+	/**
+	* returns the root Node.
+	* @return Node (root)
+	*/
 	public Node getRoot(){
 		return root;
 	}
 
+	/**
+	* returns the Node for the given word.
+	* @param word (String)
+	* @return Node
+	*/
 	public Node getNode(String word){
 		Node currentNode = root;
 		while(currentNode != null)	{
@@ -82,6 +91,10 @@ public class TreeBuilder {
 		return null;	
 	}
 
+	/**
+	* accept method for visitor pattern
+	* @param visitor (VisitorI)
+	*/
 	public void accept(VisitorI visitor){
 		visitor.visit(this);
 	}

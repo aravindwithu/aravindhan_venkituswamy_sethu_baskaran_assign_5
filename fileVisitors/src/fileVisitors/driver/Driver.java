@@ -28,6 +28,7 @@ public class Driver
 	    try{
 	    	// command line validation for input file and output file respectively.
 	    	String inputFile = "",outputFile = "";
+	    	int logger = 0;
 		    if(3 == args.length){// validates given arguments array length to 5.
 		    	if(!args[0].equals("${arg0}") && !args[0].equals("")){// validates 1st input file argument value.
 		    		inputFile = args[0];
@@ -49,7 +50,8 @@ public class Driver
 				}
 				else{
 					try{
-						MyLogger.setDebugValue(Integer.parseInt(args[2]));
+						logger = Integer.parseInt(args[2]);
+						MyLogger.setDebugValue(logger);
 					}
 					catch(Exception e){
 						e.printStackTrace();
@@ -65,6 +67,8 @@ public class Driver
 			file = new FileProcessor(inputFile);
 			// defines result object
 			results = new Results(outputFile);
+
+			// driver code for visitor pattern.
 			TreeBuilder myTree = new TreeBuilder();
 
 			VisitorI populateVisitor = new PopulateVisitor(file);
@@ -79,13 +83,16 @@ public class Driver
     		VisitorI printTree = new PrintTree(results);
     		myTree.accept(printTree);
 
-    		// writeAll method from Results class is called with writer object to write the test case results to the output file.
+    		// Results class is called with writer object to write the results to the output file.
     		Iterator iter = results.getIterator();
     		while(iter.hasNext()){
 				String resultStr = (String) iter.next();
 				results.writeSchedulesToFile(resultStr);
+				if(logger == 2){
+					results.writeToScreen(resultStr);
+				}
 			}
-			results.closeWriter();
+			results.closeWriter();// closes file
 	    }
 	    catch(Exception ex){
 	    	System.err.println(ex.getMessage());// prints the error message.

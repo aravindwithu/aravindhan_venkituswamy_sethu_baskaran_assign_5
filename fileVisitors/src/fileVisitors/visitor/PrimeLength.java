@@ -11,10 +11,19 @@ import fileVisitors.myTree.Node;
 */
 public class PrimeLength implements VisitorI{
 
+	/**
+	* PrimeLength constructor to intialize PrimeLength class.
+	*/
 	public PrimeLength(){
 		MyLogger.writeMessage("Inside PrimeLength constructor",MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
+	/**
+	* checkPrimelength method.
+	* checks whether the given string is prime length or not.
+	* @param word (String)
+	* @return boolean
+	*/
 	private boolean checkPrimelength(String word){
 		int length = word.length();
 		if(length < 2){
@@ -28,6 +37,11 @@ public class PrimeLength implements VisitorI{
 		return true;
 	}
 
+	/**
+	* primedTree method.
+	* Traverse the tree inorder and add PRIME string to words which has lenght of prime number.
+	* @param node (Node)
+	*/
 	private void primedTree(Node node){
 		if(node == null){
 			return;
@@ -36,10 +50,16 @@ public class PrimeLength implements VisitorI{
 		if(checkPrimelength(node.getWord())){
 			String primeString = node.getWord() + "-PRIME";
 			node.setWord(primeString);
+			MyLogger.writeMessage("Prime Length - "+node.getWord(),MyLogger.DebugLevel.PRIME_LENGTH);
 		}
 		primedTree(node.getRightChild());
 	}
 
+	/**
+	* visit method.
+	* Vist method for visitor pattern.
+	* @param TreeBuilder (tree)
+	*/
 	public void visit(TreeBuilder tree){
     	primedTree(tree.getRoot());
 	}
